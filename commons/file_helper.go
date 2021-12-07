@@ -3,6 +3,8 @@ package commons
 import (
 	"bufio"
 	"os"
+	"strconv"
+	"strings"
 )
 
 func ReadFile(path string) ([]string, error) {
@@ -19,4 +21,14 @@ func ReadFile(path string) ([]string, error) {
 		lines = append(lines, scanner.Text())
 	}
 	return lines, nil
+}
+
+func LinetoInt(line string) []int {
+	values := strings.Split(line, ",")
+	var days []int
+	for _, val := range values {
+		day, _ := strconv.Atoi(val)
+		days = append(days, day)
+	}
+	return days
 }

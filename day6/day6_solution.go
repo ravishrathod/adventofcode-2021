@@ -2,8 +2,6 @@ package main
 
 import (
 	"adventoccode2021/commons"
-	"strconv"
-	"strings"
 )
 
 func main() {
@@ -11,16 +9,16 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	dayOneCounters := toInt(lines[0])
+	dayOneCounters := commons.LinetoInt(lines[0])
 	fishesByCounter := make(map[int]int)
 
 	for _, counter := range dayOneCounters {
 		fishesByCounter[counter]++
 	}
-	for i := 1;i<=256;i++ {
+	for day := 1; day <=256; day++ {
 		existingDayZeroFishes := fishesByCounter[0]
-		for day := 1;day <=8;day++ {
-			fishesByCounter[day-1] = fishesByCounter[day]
+		for counter := 1; counter <=8; counter++ {
+			fishesByCounter[counter-1] = fishesByCounter[counter]
 		}
 		fishesByCounter[8] = existingDayZeroFishes
 		fishesByCounter[6] += existingDayZeroFishes
@@ -30,14 +28,4 @@ func main() {
 		totalFishes = totalFishes + fishes
 	}
 	println("Total fishes: ", totalFishes)
-}
-
-func toInt(line string) []int {
-	values := strings.Split(line, ",")
-	var days []int
-	for _, val := range values {
-		day, _ := strconv.Atoi(val)
-		days = append(days, day)
-	}
-	return days
 }
