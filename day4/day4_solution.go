@@ -3,7 +3,6 @@ package main
 import (
 	"adventoccode2021/commons"
 	"fmt"
-	"strconv"
 	"strings"
 )
 
@@ -13,9 +12,8 @@ func main() {
 		panic(err)
 	}
 	draws := parseDraws(lines)
-	bingoBoards := parseBoards(lines)
-	part1(draws, bingoBoards)
-	part2(draws, bingoBoards)
+	part1(draws, parseBoards(lines))
+	part2(draws, parseBoards(lines))
 
 }
 
@@ -83,11 +81,6 @@ func parseBoards(lines []string) []BingoBoard {
 func parseDraws(lines []string) []int {
 	var draws []int
 	firstLine := lines[0]
-	drawStr := strings.Split(firstLine, ",")
-
-	for _, str := range drawStr {
-		draw , _ := strconv.Atoi(str)
-		draws = append(draws, draw)
-	}
+	draws = commons.LinetoInt(firstLine)
 	return draws
 }

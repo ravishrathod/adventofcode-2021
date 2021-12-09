@@ -18,7 +18,7 @@ func main() {
 
 func part1(positions []int) {
 	median := findMedian(positions)
-	coast := calculateCostToMove(positions, median)
+	coast := calculateLinearCostToMove(positions, median)
 	println(coast)
 }
 
@@ -48,7 +48,7 @@ func calculateExponentialCost(from int, to int) int {
 	return coast
 }
 
-func calculateCostToMove(positions []int, targetPosition int) int {
+func calculateLinearCostToMove(positions []int, targetPosition int) int {
 	totalCost := 0
 	for _, pos := range positions {
 		cost := mod(pos - targetPosition)
