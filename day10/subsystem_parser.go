@@ -3,15 +3,15 @@ package main
 import "adventoccode2021/commons"
 
 type SubSystemParser struct {
-	input          string
-	stack          *commons.Stack
-	openingSymbols map[string]bool
+	input                     string
+	stack                     *commons.Stack
+	openingSymbols            map[string]bool
 	closingSymbols            map[string]bool
 	openingToClosingSymbolMap map[string]string
 	corrupted                 bool
-	incomplete    bool
-	illegalSymbol string
-	completionSymbols []string
+	incomplete                bool
+	illegalSymbol             string
+	completionSymbols         []string
 }
 
 func CreateSubSystemParser(input string) *SubSystemParser {
@@ -20,10 +20,10 @@ func CreateSubSystemParser(input string) *SubSystemParser {
 		input: input,
 	}
 	parser.openingToClosingSymbolMap = map[string]string{
-		"(":")",
-		"[":"]",
-		"{":"}",
-		"<":">",
+		"(": ")",
+		"[": "]",
+		"{": "}",
+		"<": ">",
 	}
 	parser.openingSymbols = make(map[string]bool)
 	parser.closingSymbols = make(map[string]bool)
@@ -48,7 +48,7 @@ func (this *SubSystemParser) Parse() {
 				this.illegalSymbol = symbol
 				return
 			}
-			if this.openingToClosingSymbolMap[openingSymbol] != symbol{
+			if this.openingToClosingSymbolMap[openingSymbol] != symbol {
 				this.corrupted = true
 				this.illegalSymbol = symbol
 				return
@@ -59,19 +59,15 @@ func (this *SubSystemParser) Parse() {
 			}
 		}
 	}
-	this.incomplete = ! this.stack.IsEmpty()
+	this.incomplete = !this.stack.IsEmpty()
 	if this.incomplete {
 		this.computeCompletionSymbols()
 	}
 }
 
 func (this *SubSystemParser) computeCompletionSymbols() {
-	for unbalancedSymbol, err := this.stack.Pop(); ; {
-		if err != nil {
-			break
-		}
+	for unbalancedSymbol, err := this.stack.Pop(); err == nil; unbalancedSymbol, err = this.stack.Pop() {
 		this.completionSymbols = append(this.completionSymbols, this.openingToClosingSymbolMap[unbalancedSymbol])
-		unbalancedSymbol, err = this.stack.Pop()
 	}
 }
 

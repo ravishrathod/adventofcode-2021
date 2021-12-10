@@ -23,7 +23,7 @@ func (this *Stack) Pop() (string, error) {
 	if size == 0 {
 		return "", errors.New("empty stack")
 	}
-	index := size -1
+	index := size - 1
 	value := this.entries[index]
 	this.entries = this.entries[:index]
 	return value, nil

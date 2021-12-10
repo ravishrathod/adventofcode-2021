@@ -40,4 +40,3 @@ func corruptLine(t *testing.T, line string, symbol string) {
 	assert.True(t, parser.IsCorrupted())
 	assert.Equal(t, symbol, parser.IllegalSymbol())
 }
-
