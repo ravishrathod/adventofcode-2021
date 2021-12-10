@@ -54,7 +54,7 @@ func part2(lines []string) {
 	var oxygenValues = lines
 	var co2Values = lines
 
-	for position := 0 ;position<inputLength;position++ {
+	for position := 0; position < inputLength; position++ {
 		if len(oxygenValues) != 1 {
 			oxygenCounts := calculateCountsForPosition(oxygenValues, position)
 			oxygenValues = calculateOxygenRating(oxygenValues, oxygenCounts, position)
@@ -100,7 +100,7 @@ func filterValues(values []string, position int, selectionChar string) []string 
 	return filteredValues
 }
 
-func calculateCountsForPosition(lines []string, position int) digitCounts  {
+func calculateCountsForPosition(lines []string, position int) digitCounts {
 	count := &digitCounts{}
 	for _, value := range lines {
 		charAtPosition := string(value[position])
@@ -115,5 +115,5 @@ func calculateCountsForPosition(lines []string, position int) digitCounts  {
 
 type digitCounts struct {
 	ZeroCount int
-	OneCount int
+	OneCount  int
 }

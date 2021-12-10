@@ -35,7 +35,7 @@ func part1(draws []int, bingoBoards []BingoBoard) {
 	}
 }
 
-func part2(draws []int, bingoBoards []BingoBoard)  {
+func part2(draws []int, bingoBoards []BingoBoard) {
 	totalBoardsSolved := 0
 	complete := false
 	for _, draw := range draws {
@@ -49,7 +49,7 @@ func part2(draws []int, bingoBoards []BingoBoard)  {
 			solved := board.mark(draw)
 			if solved {
 				totalBoardsSolved += 1
-				if totalBoardsSolved == len(bingoBoards)  {
+				if totalBoardsSolved == len(bingoBoards) {
 					complete = true
 					println(board.score())
 					break

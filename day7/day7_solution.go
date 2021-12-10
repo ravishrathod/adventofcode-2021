@@ -24,13 +24,13 @@ func part1(positions []int) {
 
 func part2(positions []int) {
 	mean := findMean(positions)
-	targetsToTry := []int {mean-1, mean, mean+1}
+	targetsToTry := []int{mean - 1, mean, mean + 1}
 	var costs []float64
 	for _, target := range targetsToTry {
 		cost := calculateExponentialCostToMove(positions, target)
 		costs = append(costs, float64(cost))
 	}
-	minCost,_ := stats.Min(costs)
+	minCost, _ := stats.Min(costs)
 	print(int(minCost))
 }
 

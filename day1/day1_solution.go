@@ -35,8 +35,8 @@ func calculateTotalIncrements(input []int) int {
 func part2(input []int) {
 	var windows []int
 	for i, depth := range input {
-		if i >1 {
-			windows = append(windows, depth + input[i-1] + input[i-2])
+		if i > 1 {
+			windows = append(windows, depth+input[i-1]+input[i-2])
 		}
 	}
 	depthIncreaseCount := calculateTotalIncrements(windows)

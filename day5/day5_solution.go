@@ -38,7 +38,7 @@ func calculateIntersectionsV2(lines []Line) {
 	for _, line := range lines {
 		points := line.getPoints()
 		for _, point := range points {
-			intersectionCounts[point] ++
+			intersectionCounts[point]++
 		}
 	}
 	for _, count := range intersectionCounts {

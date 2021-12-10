@@ -16,7 +16,7 @@ func main() {
 	part2(readings)
 }
 
-func part2(readings []Reading)  {
+func part2(readings []Reading) {
 	sum := 0
 	for _, reading := range readings {
 		value := decode(reading)
@@ -69,11 +69,11 @@ func decode(reading Reading) int {
 	return intValue
 }
 
-func computeL(four SignalPattern, one SignalPattern) *SignalPattern  {
+func computeL(four SignalPattern, one SignalPattern) *SignalPattern {
 	segments := one.Segments
 	result := ""
 	for _, char := range four.SegmentArray() {
-		if ! strings.Contains(segments, char) {
+		if !strings.Contains(segments, char) {
 			result = result + char
 		}
 	}

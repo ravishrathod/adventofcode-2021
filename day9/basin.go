@@ -5,16 +5,16 @@ import (
 )
 
 type Basin struct {
-	Points map[string]bool
+	Points   map[string]bool
 	LowPoint LowPoint
 }
 
-func (this *Basin) HasPoint(x int, y int) bool  {
+func (this *Basin) HasPoint(x int, y int) bool {
 	formatted := this.formatPoint(x, y)
 	return this.Points[formatted]
 }
 
-func (this *Basin) AddPoint(x int, y int)  {
+func (this *Basin) AddPoint(x int, y int) {
 	formatted := this.formatPoint(x, y)
 	this.Points[formatted] = true
 }

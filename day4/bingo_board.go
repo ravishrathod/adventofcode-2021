@@ -6,7 +6,7 @@ import (
 )
 
 type BoardEntry struct {
-	Value int
+	Value  int
 	Marked bool
 }
 
@@ -17,14 +17,14 @@ type BingoBoard interface {
 }
 
 type BingoBoardStruct struct {
-	entries [][]*BoardEntry
-	lastMarkedValue int
-	lastMarkedRows []int
+	entries           [][]*BoardEntry
+	lastMarkedValue   int
+	lastMarkedRows    []int
 	lastMarkedColumns []int
-	solved bool
+	solved            bool
 }
 
-func(this *BingoBoardStruct) mark(value int) bool {
+func (this *BingoBoardStruct) mark(value int) bool {
 	this.lastMarkedRows = []int{}
 	this.lastMarkedColumns = []int{}
 	for i, row := range this.entries {
@@ -40,7 +40,7 @@ func(this *BingoBoardStruct) mark(value int) bool {
 	return this.isSolvedFast()
 }
 
-func(this *BingoBoardStruct) isSolvedFast() bool {
+func (this *BingoBoardStruct) isSolvedFast() bool {
 	if len(this.lastMarkedRows) == 0 && len(this.lastMarkedColumns) == 0 {
 		return false
 	}
@@ -65,7 +65,7 @@ func(this *BingoBoardStruct) isSolvedFast() bool {
 	for _, colNum := range this.lastMarkedColumns {
 		solved = true
 		for _, row := range this.entries {
-			if ! row[colNum].Marked {
+			if !row[colNum].Marked {
 				solved = false
 				break
 			}
@@ -78,15 +78,15 @@ func(this *BingoBoardStruct) isSolvedFast() bool {
 	return solved
 }
 
-func(this *BingoBoardStruct) isSolved() bool {
+func (this *BingoBoardStruct) isSolved() bool {
 	return this.solved
 }
 
-func(this *BingoBoardStruct) score() int {
+func (this *BingoBoardStruct) score() int {
 	unmarkedSum := 0
 	for _, row := range this.entries {
 		for _, entry := range row {
-			if ! entry.Marked {
+			if !entry.Marked {
 				unmarkedSum += entry.Value
 			}
 		}
@@ -108,7 +108,7 @@ func CreateBoard(lines []string) BingoBoard {
 		if len(digits) != 5 {
 			panic("invalid input " + line)
 		}
-		for col, digit :=  range digits {
+		for col, digit := range digits {
 			boardEntry := &BoardEntry{
 				Value:  digit,
 				Marked: false,
@@ -129,7 +129,7 @@ func parseDigits(line string) []int {
 		if strings.TrimSpace(value) == "" {
 			continue
 		}
-		num,_ := strconv.Atoi(value)
+		num, _ := strconv.Atoi(value)
 		digits = append(digits, num)
 	}
 	return digits

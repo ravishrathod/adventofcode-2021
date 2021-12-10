@@ -51,7 +51,7 @@ func part2(heightMap [][]int) {
 func findBasin(lowPoint LowPoint, heightMap [][]int) Basin {
 	basin := &Basin{
 		LowPoint: lowPoint,
-		Points: make(map[string]bool),
+		Points:   make(map[string]bool),
 	}
 	addPointsToBasin(basin, lowPoint.X, lowPoint.Y, lowPoint.Value-1, heightMap)
 
@@ -65,20 +65,20 @@ func addPointsToBasin(basin *Basin, x int, y int, sourceValue int, heightMap [][
 	if currentValue < sourceValue || currentValue == 9 {
 		return
 	}
-	if ! basin.HasPoint(x, y) {
+	if !basin.HasPoint(x, y) {
 		basin.AddPoint(x, y)
 	}
-	if x > 0 && ! basin.HasPoint(x-1, y) {
-		addPointsToBasin(basin , x-1, y, currentValue, heightMap)
+	if x > 0 && !basin.HasPoint(x-1, y) {
+		addPointsToBasin(basin, x-1, y, currentValue, heightMap)
 	}
-	if x < width-1 && ! basin.HasPoint(x+1, y) {
-		addPointsToBasin(basin , x+1, y, currentValue, heightMap)
+	if x < width-1 && !basin.HasPoint(x+1, y) {
+		addPointsToBasin(basin, x+1, y, currentValue, heightMap)
 	}
-	if y > 0 && ! basin.HasPoint(x, y-1) {
-		addPointsToBasin(basin , x, y-1, currentValue, heightMap)
+	if y > 0 && !basin.HasPoint(x, y-1) {
+		addPointsToBasin(basin, x, y-1, currentValue, heightMap)
 	}
-	if y < height-1 && ! basin.HasPoint(x, y+1) {
-		addPointsToBasin(basin , x, y+1, currentValue, heightMap)
+	if y < height-1 && !basin.HasPoint(x, y+1) {
+		addPointsToBasin(basin, x, y+1, currentValue, heightMap)
 	}
 
 }
@@ -88,13 +88,13 @@ func findLowPoints(heightMap [][]int) []LowPoint {
 	height := len(heightMap)
 	width := len(heightMap[0])
 
-	for y := 0;y<height;y++ {
-		for x := 0;x<width;x++ {
+	for y := 0; y < height; y++ {
+		for x := 0; x < width; x++ {
 			if isLowest(x, y, width, height, heightMap) {
 				lowPoint := LowPoint{
 					Value: heightMap[y][x],
-					X: x,
-					Y: y,
+					X:     x,
+					Y:     y,
 				}
 				lowPoints = append(lowPoints, lowPoint)
 			}
@@ -103,7 +103,7 @@ func findLowPoints(heightMap [][]int) []LowPoint {
 	return lowPoints
 }
 
-func isLowest(x int, y int, width int, height int, heightMap [][]int) bool  {
+func isLowest(x int, y int, width int, height int, heightMap [][]int) bool {
 	depth := heightMap[y][x]
 	lowPoint := true
 	if x > 0 {
@@ -138,4 +138,3 @@ func stringToIntArray(line string) []int {
 	}
 	return numbers
 }
-

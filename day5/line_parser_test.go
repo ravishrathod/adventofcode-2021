@@ -6,7 +6,7 @@ import (
 )
 
 func Test_parseLines(t *testing.T) {
-	textLines := []string {"599,531 -> 599,32", "845,552 -> 596,801", "535,556 -> 349,556"}
+	textLines := []string{"599,531 -> 599,32", "845,552 -> 596,801", "535,556 -> 349,556"}
 	lines := parseLines(textLines)
 	assert.Equal(t, 3, len(lines))
 

@@ -6,9 +6,9 @@ type Point struct {
 }
 
 type Line struct {
-	start Point
-	end Point
-	slope int
+	start     Point
+	end       Point
+	slope     int
 	intercept int
 }
 
@@ -25,12 +25,12 @@ func CreateLine(start Point, end Point) *Line {
 		intercept = start.X + start.Y
 	} else {
 		slope = 1
-		intercept =  start.Y - start.X
+		intercept = start.Y - start.X
 	}
 	return &Line{
-		start: start,
-		end: end,
-		slope: slope,
+		start:     start,
+		end:       end,
+		slope:     slope,
 		intercept: intercept,
 	}
 }
@@ -54,7 +54,7 @@ func (this *Line) getPoints() []Point {
 			maxY = this.end.Y
 			minY = this.start.Y
 		}
-		for y:= minY;y<= maxY;y++ {
+		for y := minY; y <= maxY; y++ {
 			point := Point{
 				X: this.start.X,
 				Y: y,
@@ -70,8 +70,8 @@ func (this *Line) getPoints() []Point {
 			minX = this.end.X
 			maxX = this.start.X
 		}
-		for x:=minX;x<=maxX;x++ {
-			point := Point {
+		for x := minX; x <= maxX; x++ {
+			point := Point{
 				X: x,
 				Y: this.slope*x + this.intercept,
 			}

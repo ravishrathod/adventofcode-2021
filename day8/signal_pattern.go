@@ -6,7 +6,7 @@ import (
 )
 
 type SignalPattern struct {
-	Segments string
+	Segments       string
 	SortedSegments string
 }
 
@@ -18,7 +18,7 @@ func (this *SignalPattern) SegmentArray() []string {
 	return array
 }
 
-func (this *SignalPattern) ContainsAll(input string) bool  {
+func (this *SignalPattern) ContainsAll(input string) bool {
 	containsAll := true
 	for _, val := range []rune(input) {
 		containsAll = containsAll && strings.Contains(this.SortedSegments, string(val))
@@ -65,7 +65,7 @@ func CreateSignalPattern(input string) *SignalPattern {
 	}
 	sort.Strings(segments)
 	return &SignalPattern{
-		Segments: input,
+		Segments:       input,
 		SortedSegments: strings.Join(segments, ""),
 	}
 }

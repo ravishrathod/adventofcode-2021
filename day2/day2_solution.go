@@ -20,19 +20,19 @@ func main() {
 func part1(commands []command) {
 	var x int
 	var depth int
-	
-	for _, command :=  range commands {
+
+	for _, command := range commands {
 		switch command.Direction {
 		case "forward":
 			x = x + command.Amplitude
 		case "up":
-			depth =  depth - command.Amplitude
+			depth = depth - command.Amplitude
 		case "down":
-			depth =  depth + command.Amplitude
+			depth = depth + command.Amplitude
 		}
 	}
 
-	println(x*depth)
+	println(x * depth)
 }
 
 func part2(commands []command) {
@@ -44,7 +44,7 @@ func part2(commands []command) {
 		switch command.Direction {
 		case "forward":
 			x = x + command.Amplitude
-			depth =  depth + aim * command.Amplitude
+			depth = depth + aim*command.Amplitude
 		case "up":
 			aim = aim - command.Amplitude
 		case "down":
@@ -52,7 +52,7 @@ func part2(commands []command) {
 		}
 	}
 
-	println(x*depth)
+	println(x * depth)
 }
 
 func parseToCommands(lines []string) ([]command, error) {

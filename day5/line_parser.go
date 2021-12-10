@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func parseLines(fileLines []string) []Line  {
+func parseLines(fileLines []string) []Line {
 	var lines []Line
 	for _, fileLine := range fileLines {
 		startAndEnd := strings.Split(fileLine, " -> ")

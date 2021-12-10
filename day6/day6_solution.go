@@ -15,9 +15,9 @@ func main() {
 	for _, counter := range dayOneCounters {
 		fishesByCounter[counter]++
 	}
-	for day := 1; day <=256; day++ {
+	for day := 1; day <= 256; day++ {
 		existingDayZeroFishes := fishesByCounter[0]
-		for counter := 1; counter <=8; counter++ {
+		for counter := 1; counter <= 8; counter++ {
 			fishesByCounter[counter-1] = fishesByCounter[counter]
 		}
 		fishesByCounter[8] = existingDayZeroFishes
