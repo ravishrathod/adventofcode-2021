@@ -5,10 +5,11 @@ import (
 	"testing"
 )
 
-func TestSubSystemParser_IncompleteLine(t *testing.T) {
-	parser := CreateSubSystemParser("[({(<(())[]>[[{[]{<()<>>")
+func TestSubSystemParser_CompleteLine(t *testing.T) {
+	parser := CreateSubSystemParser("([<(())[]>])")
 	parser.Parse()
 	assert.False(t, parser.IsCorrupted())
+	assert.False(t, parser.IsIncomplete())
 }
 
 func TestSubSystemParser_CorruptLine(t *testing.T) {
