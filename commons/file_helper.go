@@ -23,7 +23,7 @@ func ReadFile(path string) ([]string, error) {
 	return lines, nil
 }
 
-func LinetoInt(line string) []int {
+func LinetoIntArray(line string) []int {
 	values := strings.Split(line, ",")
 	var days []int
 	for _, val := range values {
@@ -31,4 +31,13 @@ func LinetoInt(line string) []int {
 		days = append(days, day)
 	}
 	return days
+}
+
+func LineToIntArrayNoSeparator(line string) []int {
+	var numbers []int
+	for _, char := range []rune(line) {
+		number, _ := strconv.Atoi(string(char))
+		numbers = append(numbers, number)
+	}
+	return numbers
 }

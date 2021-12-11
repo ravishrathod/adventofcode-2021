@@ -3,7 +3,6 @@ package main
 import (
 	"adventoccode2021/commons"
 	"sort"
-	"strconv"
 )
 
 func main() {
@@ -124,17 +123,8 @@ func isLowest(x int, y int, width int, height int, heightMap [][]int) bool {
 func parseHeightMap(lines []string) [][]int {
 	heightMap := make([][]int, len(lines))
 	for i, line := range lines {
-		numbers := stringToIntArray(line)
+		numbers := commons.LineToIntArrayNoSeparator(line)
 		heightMap[i] = numbers
 	}
 	return heightMap
-}
-
-func stringToIntArray(line string) []int {
-	var numbers []int
-	for _, char := range []rune(line) {
-		number, _ := strconv.Atoi(string(char))
-		numbers = append(numbers, number)
-	}
-	return numbers
 }

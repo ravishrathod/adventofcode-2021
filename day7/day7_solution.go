@@ -11,7 +11,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	positions := commons.LinetoInt(lines[0])
+	positions := commons.LinetoIntArray(lines[0])
 	part1(positions)
 	part2(positions)
 }

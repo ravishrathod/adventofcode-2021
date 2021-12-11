@@ -9,7 +9,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	dayOneCounters := commons.LinetoInt(lines[0])
+	dayOneCounters := commons.LinetoIntArray(lines[0])
 	fishesByCounter := make(map[int]int)
 
 	for _, counter := range dayOneCounters {

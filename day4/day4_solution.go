@@ -81,6 +81,6 @@ func parseBoards(lines []string) []BingoBoard {
 func parseDraws(lines []string) []int {
 	var draws []int
 	firstLine := lines[0]
-	draws = commons.LinetoInt(firstLine)
+	draws = commons.LinetoIntArray(firstLine)
 	return draws
 }
