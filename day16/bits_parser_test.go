@@ -62,8 +62,9 @@ func TestBitsParser_test(t *testing.T) {
 	assert.Equal(t, 4, child.typ)
 	assert.Equal(t, 0, len(child.subPackets))
 
-	sum := addVersions(0, *packet)
-	assert.Equal(t, 16, sum)
+	counter := &Counter{}
+	addVersions(counter, *packet)
+	assert.Equal(t, 16, counter.ticker)
 }
 
 func TestBitsParser_test1(t *testing.T) {
@@ -71,7 +72,7 @@ func TestBitsParser_test1(t *testing.T) {
 	packet := parser.ParseInput("620080001611562C8802118E34")
 	assert.NotNil(t, packet)
 
-	assert.Equal(t, 2, packet.typ)
+	assert.Equal(t, 0, packet.typ)
 	assert.Equal(t, 2, len(packet.subPackets))
 	//child := packet.subPackets[0]
 	//assert.Equal(t, 2, child.typ)
@@ -83,7 +84,8 @@ func TestBitsParser_test1(t *testing.T) {
 	//assert.Equal(t, 4, child.typ)
 	//assert.Equal(t, 0, len(child.subPackets))
 
-	sum := addVersions(0, *packet)
-	assert.Equal(t, 12, sum)
+	counter := &Counter{}
+	addVersions(counter, *packet)
+	assert.Equal(t, 12, counter.ticker)
 }
 

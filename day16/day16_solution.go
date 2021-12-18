@@ -1,6 +1,8 @@
 package main
 
-import "adventoccode2021/commons"
+import (
+	"adventoccode2021/commons"
+)
 
 func main() {
 	lines, err := commons.ReadFile("input/day16.txt")
@@ -9,13 +11,22 @@ func main() {
 	}
 	bitParser := BitsParser{}
 	packet := bitParser.ParseInput(lines[0])
-	println(addVersions(0, *packet))
+	counter := &Counter{}
+	addVersions(counter, *packet)
+	println(counter.ticker)
 }
 
-func addVersions(sum int , packet Packet) int {
+func addVersions(counter *Counter , packet Packet) {
 	for _, subPacket := range packet.subPackets {
-		sum += addVersions(sum, *subPacket)
+		addVersions(counter, *subPacket)
 	}
-	sum += packet.version
-	return sum
+	counter.Add(packet.version)
+}
+
+type Counter struct {
+	ticker int
+}
+
+func (c *Counter) Add(value int) {
+	c.ticker += value
 }

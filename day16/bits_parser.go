@@ -31,7 +31,6 @@ type BitsParser struct {
 func (bp *BitsParser) ParseInput(input string) *Packet  {
 	inputArray := bp.stringToArray(input)
 	binaryArray := bp.hexToBinary(inputArray)
-	println(strings.Join(binaryArray, ""))
 	packet := &Packet{
 		version: 0,
 		typ: -1,
@@ -41,22 +40,17 @@ func (bp *BitsParser) ParseInput(input string) *Packet  {
 	return packet.subPackets[0]
 }
 
-func (bp *BitsParser) parseSubPacket(input []string, parent *Packet) {
-	if len(input) < 7 {
-		return
+func (bp *BitsParser) parseSubPacket(input []string, parent *Packet) []string {
+	if !bp.hasMore(input) {
+		return []string{}
 	}
 	packet := bp.createPacket(input)
 	parent.subPackets = append(parent.subPackets, packet)
 	if packet.typ == 4 {
-		value, index, hasMore := bp.parseLiteralPacketValue(input)
+		value, index, _ := bp.parseLiteralPacketValue(input)
 		packet.value = value
-		if hasMore {
-			input = input[index:]
-			bp.parseSubPacket(input, parent)
-			return
-		} else {
-			return
-		}
+		input = input[index:]
+		return input
 	}
 	lengthTypeId := input[6]
 	readIndex := 6
@@ -65,15 +59,29 @@ func (bp *BitsParser) parseSubPacket(input []string, parent *Packet) {
 		readIndex += 15+1
 		subPacketLength := bp.binaryArrayToInt(lengthBits)
 		subPacketArray := input[readIndex:(readIndex+subPacketLength)]
-		bp.parseSubPacket(subPacketArray, packet)
-	} else if lengthTypeId == "1" {
+		readIndex += subPacketLength
+		for ;len(subPacketArray) > 0; {
+			subPacketArray = bp.parseSubPacket(subPacketArray, packet)
+		}
+		return input[readIndex:]
+	} else {
 		lengthBits := input[readIndex+1:(readIndex+11+1)]
 		readIndex += 11+1
 		subStackCount := bp.binaryArrayToInt(lengthBits)
-		println(subStackCount)
-		subPacketArray := input[readIndex:]
-		bp.parseSubPacket(subPacketArray, packet)
+		remaining := input[readIndex:]
+		for i:=0;i<subStackCount;i++ {
+			remaining = bp.parseSubPacket(remaining, packet)
+		}
+		return remaining
 	}
+}
+
+func (bp *BitsParser) hasMore(input []string) bool {
+	if len(input) < 7 {
+		return false
+	}
+	intVal := bp.binaryArrayToInt(input)
+	return intVal > 0
 }
 
 func (bp *BitsParser) parseLiteralPacketValue(input []string) (int, int, bool) {
@@ -142,7 +150,7 @@ func (bp *BitsParser) hexToBinary(input []string) []string {
 func (bp *BitsParser) stringToArray(input string) []string {
 	var array []string
 	for _, char := range []rune(input) {
-		array = append(array, string((char)))
+		array = append(array, string(char))
 	}
 	return array
 }
