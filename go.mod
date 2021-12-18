@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/montanaflynn/stats v0.6.6
 	github.com/stretchr/testify v1.7.0
+	github.com/emirpasic/gods v1.12.0
 )
 
 require (

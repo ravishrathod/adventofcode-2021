@@ -2,9 +2,15 @@ package main
 
 import (
 	"adventoccode2021/commons"
+	"fmt"
+	_ "net/http/pprof"
+	"time"
 )
 
 func main() {
+	//go func() {
+	//	log.Println(http.ListenAndServe("localhost:6060", nil))
+	//}()
 	lines, err := commons.ReadFile("input/day15.txt")
 	if err != nil {
 		panic(err)
@@ -17,6 +23,19 @@ func main() {
 
 	}
 	pathFinder := NewPathFinder(matrix)
+	start := time.Now()
 	pathFinder.FindShortestPath()
-	print(pathFinder.GetShortestDistance())
+	println(pathFinder.GetShortestDistance())
+	fmt.Printf("Time : %d(ms)", time.Since(start)/time.Millisecond)
+	println("")
+
+	extrapolater := NewCaveExtrapolater(matrix)
+	biggerCave := extrapolater.Extrapolate()
+
+	start = time.Now()
+	pathFinder = NewPathFinder(biggerCave)
+	pathFinder.FindShortestPath()
+	println(pathFinder.GetShortestDistance())
+	fmt.Printf("Time : %d(ms)", time.Since(start)/time.Millisecond)
+	println("")
 }
