@@ -13,7 +13,11 @@ func main() {
 	packet := bitParser.ParseInput(lines[0])
 	counter := &Counter{}
 	addVersions(counter, *packet)
-	println(counter.ticker)
+	println("Sum of Versions: ", counter.ticker)
+
+	evaluator := PacketEvaluator{}
+	value := evaluator.evaluatePacket(packet)
+	println("Eval result ", value)
 }
 
 func addVersions(counter *Counter , packet Packet) {

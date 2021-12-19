@@ -45,6 +45,7 @@ func (bp *BitsParser) parseSubPacket(input []string, parent *Packet) []string {
 		return []string{}
 	}
 	packet := bp.createPacket(input)
+	packet.parent = parent
 	parent.subPackets = append(parent.subPackets, packet)
 	if packet.typ == 4 {
 		value, index, _ := bp.parseLiteralPacketValue(input)
@@ -153,11 +154,4 @@ func (bp *BitsParser) stringToArray(input string) []string {
 		array = append(array, string(char))
 	}
 	return array
-}
-
-type Packet struct {
-	version    int
-	typ        int
-	value      int
-	subPackets []*Packet
 }
